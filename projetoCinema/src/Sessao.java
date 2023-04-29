@@ -1,7 +1,7 @@
 public class Sessao {
 
     private String filme;
-    private String[][] cadeirasDisponiveis = new String[2][2];
+    private String[][] cadeirasDisponiveis = new String[10][15];
     private String ocupado = "[X]";
     private String disponivel = "[]";
 
