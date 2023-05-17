@@ -1,15 +1,11 @@
 public class Sala {
-    private Filme filmes[] = new Filme[6];
-    private Sessao poltronasPorSessao[] = new Sessao[6];
+    private Filme filmes[] = new Filme[100];
+    private Sessao poltronasPorSessao[] = new Sessao[100];
+    private int filmesAdicionados = 0;
 
 
     public Sala() {
-        filmes[0] = new Filme("Gato de botas 2", "08:00 - 10:00", "sinopse", 25.00);
-        filmes[1] = new Filme("Avatar: O caminho da água", "10:30 - 12:00", "sinopse", 25.00);
-        filmes[2] = new Filme("Homem-formiga e vespa", "12:30 - 15:00", "sinopse", 25.00);
-        filmes[3] = new Filme("John Wick 4: Baba Yaga", "15:30 - 17:00", "sinopse", 25.00);
-        filmes[4] = new Filme("Pânico VI", "17:00 - 18:45", "sinopse", 25.00);
-        filmes[5] = new Filme("Creed III", "19:00 - 21:00", "sinopse", 25.00);
+//   terminar
     }
 
     public Sessao[] getPoltronasPorSessao() {
@@ -32,13 +28,23 @@ public class Sala {
         return filmes[i];
     }
 
+    public int getFilmesAdicionados() {
+        return this.filmesAdicionados;
+    }
+
+    public void setFilmesAdicionados(int i) {
+        this.filmesAdicionados = i;
+    }
+
     public void exibeFilmes() {
-        for (int i = 0; i < filmes.length; i++) {
-            System.out.println(i +": " + filmes[i].getNomeDoFilme() + " " + filmes[i].getDuracaoFilme());
+        for (int i = 0; i < filmesAdicionados; i++) {
+            System.out.println(i + ": " +getFilmes()[i].getNomeDoFilme() + " " + getFilmes()[i].getDuracaoFilme());
         }
+
     }
 
     public String horarioFilme(int indice) {
         return this.filmes[indice].getDuracaoFilme();
     }
+
 }
