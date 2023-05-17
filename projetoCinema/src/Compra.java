@@ -153,12 +153,17 @@ public class Compra {
                 if (response == 0) {
 
                     if (returnAux == 0) {
-                        System.out.println("\nVocê está na sessão 0");
-                        sessao0.exibeCadeiras();
                         int cont = 0;
-                        System.out.println("\nQuantos tickets deseja comprar? ");
-                        numerosTickets = s.nextInt();
+                        System.out.println("\nVocê está na sessão 0");
                         multiply = salasTipo[0].escolhaSuaSala();
+                        sessao0.exibeCadeiras();
+                        do{
+                            System.out.println("\nQuantos tickets deseja comprar? ");
+                            numerosTickets = s.nextInt();
+                            assert numerosTickets != 0;
+                        }while (numerosTickets <= 0);
+                        sessao0.sugereCadeiras(); //
+                        user.setNumeroTickets(numerosTickets);
                         numeroCadeira = new int[numerosTickets * 2];
                         numeroUnicoCadeira = new int[numerosTickets];
 
@@ -172,7 +177,9 @@ public class Compra {
                             numeroUnicoCadeira[cont] = numeroCadeira[0] * 5 + numeroCadeira[1];
                             cont++;
 
-                            if (sessao0.getCadeirasDisponiveis().length - numeroCadeira[1] < numerosTickets) {
+                            int tamanho = sessao0.getCadeirasDisponiveis().length + 1;
+
+                            if (tamanho - numeroCadeira[1] < numerosTickets) {
                                 for (int i = 0; i < numerosTickets - 1; i++) {
                                     numeroCadeira[cont * 2] = numeroCadeira[0];
                                     numeroCadeira[(cont * 2) + 1] = numeroCadeira[1] - cont;
@@ -229,12 +236,17 @@ public class Compra {
                         user.setBilhete(bilhete);
 
                     } else if (returnAux == 1) {
-                        System.out.println("\nVocê está na sessão 1");
-                        sessao1.exibeCadeiras();
                         int cont = 0;
-                        System.out.println("\nQuantos tickets deseja comprar? ");
-                        numerosTickets = s.nextInt();
-                        multiply = salasTipo[0].escolhaSuaSala();
+                        System.out.println("\nVocê está na sessão 1");
+                        multiply = salasTipo[1].escolhaSuaSala();
+                        sessao1.exibeCadeiras();
+                        do{
+                            System.out.println("\nQuantos tickets deseja comprar? ");
+                            numerosTickets = s.nextInt();
+                            assert numerosTickets != 0;
+                        }while (numerosTickets <= 0);
+                        sessao1.sugereCadeiras(); //
+                        user.setNumeroTickets(numerosTickets);
                         numeroCadeira = new int[numerosTickets * 2];
                         numeroUnicoCadeira = new int[numerosTickets];
 
@@ -248,7 +260,9 @@ public class Compra {
                             numeroUnicoCadeira[cont] = numeroCadeira[0] * 5 + numeroCadeira[1];
                             cont++;
 
-                            if (sessao0.getCadeirasDisponiveis().length - numeroCadeira[1] < numerosTickets) {
+                            int tamanho = sessao1.getCadeirasDisponiveis().length + 1;
+
+                            if (tamanho - numeroCadeira[1] < numerosTickets) {
                                 for (int i = 0; i < numerosTickets - 1; i++) {
                                     numeroCadeira[cont * 2] = numeroCadeira[0];
                                     numeroCadeira[(cont * 2) + 1] = numeroCadeira[1] - cont;
@@ -303,16 +317,19 @@ public class Compra {
                         user.setSessao(sessao1);
                         user.setBilhete(bilhete);
                     } else if (returnAux == 2) {
-
-                        System.out.println("\nVocê está na sessão 2");
-                        sessao2.exibeCadeiras();
                         int cont = 0;
-                        System.out.println("\nQuantos tickets deseja comprar? ");
-                        numerosTickets = s.nextInt();
-                        multiply = salasTipo[0].escolhaSuaSala();
+                        System.out.println("\nVocê está na sessão 2");
+                        multiply = salasTipo[2].escolhaSuaSala();
+                        sessao2.exibeCadeiras();
+                        do{
+                            System.out.println("\nQuantos tickets deseja comprar? ");
+                            numerosTickets = s.nextInt();
+                            assert numerosTickets != 0;
+                        }while (numerosTickets <= 0);
+                        sessao2.sugereCadeiras(); //
+                        user.setNumeroTickets(numerosTickets);
                         numeroCadeira = new int[numerosTickets * 2];
                         numeroUnicoCadeira = new int[numerosTickets];
-
 
                         if (numerosTickets > 1) {
 
@@ -323,7 +340,9 @@ public class Compra {
                             numeroUnicoCadeira[cont] = numeroCadeira[0] * 5 + numeroCadeira[1];
                             cont++;
 
-                            if (sessao0.getCadeirasDisponiveis().length - numeroCadeira[1] < numerosTickets) {
+                            int tamanho = sessao2.getCadeirasDisponiveis().length + 1;
+
+                            if (tamanho - numeroCadeira[1] < numerosTickets) {
                                 for (int i = 0; i < numerosTickets - 1; i++) {
                                     numeroCadeira[cont * 2] = numeroCadeira[0];
                                     numeroCadeira[(cont * 2) + 1] = numeroCadeira[1] - cont;
@@ -378,13 +397,17 @@ public class Compra {
                         user.setSessao(sessao2);
                         user.setBilhete(bilhete);
                     } else if (returnAux == 3) {
-
-                        System.out.println("\nVocê está na sessão 3");
-                        sessao3.exibeCadeiras();
                         int cont = 0;
-                        System.out.println("\nQuantos tickets deseja comprar? ");
-                        numerosTickets = s.nextInt();
-                        multiply = salasTipo[0].escolhaSuaSala();
+                        System.out.println("\nVocê está na sessão 3");
+                        multiply = salasTipo[3].escolhaSuaSala();
+                        sessao3.exibeCadeiras();
+                        do{
+                            System.out.println("\nQuantos tickets deseja comprar? ");
+                            numerosTickets = s.nextInt();
+                            assert numerosTickets != 0;
+                        }while (numerosTickets <= 0);
+                        sessao3.sugereCadeiras(); //
+                        user.setNumeroTickets(numerosTickets);
                         numeroCadeira = new int[numerosTickets * 2];
                         numeroUnicoCadeira = new int[numerosTickets];
 
@@ -398,7 +421,9 @@ public class Compra {
                             numeroUnicoCadeira[cont] = numeroCadeira[0] * 5 + numeroCadeira[1];
                             cont++;
 
-                            if (sessao0.getCadeirasDisponiveis().length - numeroCadeira[1] < numerosTickets) {
+                            int tamanho = sessao3.getCadeirasDisponiveis().length + 1;
+
+                            if (tamanho - numeroCadeira[1] < numerosTickets) {
                                 for (int i = 0; i < numerosTickets - 1; i++) {
                                     numeroCadeira[cont * 2] = numeroCadeira[0];
                                     numeroCadeira[(cont * 2) + 1] = numeroCadeira[1] - cont;
@@ -452,13 +477,17 @@ public class Compra {
                         user.setSessao(sessao3);
                         user.setBilhete(bilhete);
                     } else if (returnAux == 4) {
-
-                        System.out.println("\nVocê está na sessão 4");
-                        sessao4.exibeCadeiras();
                         int cont = 0;
-                        System.out.println("\nQuantos tickets deseja comprar? ");
-                        numerosTickets = s.nextInt();
-                        multiply = salasTipo[0].escolhaSuaSala();
+                        System.out.println("\nVocê está na sessão 4");
+                        multiply = salasTipo[4].escolhaSuaSala();
+                        sessao4.exibeCadeiras();
+                        do{
+                            System.out.println("\nQuantos tickets deseja comprar? ");
+                            numerosTickets = s.nextInt();
+                            assert numerosTickets != 0;
+                        }while (numerosTickets <= 0);
+                        sessao4.sugereCadeiras(); //
+                        user.setNumeroTickets(numerosTickets);
                         numeroCadeira = new int[numerosTickets * 2];
                         numeroUnicoCadeira = new int[numerosTickets];
 
@@ -472,7 +501,9 @@ public class Compra {
                             numeroUnicoCadeira[cont] = numeroCadeira[0] * 5 + numeroCadeira[1];
                             cont++;
 
-                            if (user.getSessao().getCadeirasDisponiveis().length - numeroCadeira[1] < numerosTickets) {
+                            int tamanho = sessao4.getCadeirasDisponiveis().length + 1;
+
+                            if (tamanho - numeroCadeira[1] < numerosTickets) {
                                 for (int i = 0; i < numerosTickets - 1; i++) {
                                     numeroCadeira[cont * 2] = numeroCadeira[0];
                                     numeroCadeira[(cont * 2) + 1] = numeroCadeira[1] - cont;
@@ -526,16 +557,19 @@ public class Compra {
                         user.setSessao(sessao4);
                         user.setBilhete(bilhete);
                     } else if (returnAux == 5) {
-
-                        System.out.println("\nVocê está na sessão 5");
-                        sessao5.exibeCadeiras();
                         int cont = 0;
-                        System.out.println("\nQuantos tickets deseja comprar? ");
-                        numerosTickets = s.nextInt();
-                        multiply = salasTipo[0].escolhaSuaSala();
+                        System.out.println("\nVocê está na sessão 5");
+                        multiply = salasTipo[5].escolhaSuaSala();
+                        sessao5.exibeCadeiras();
+                        do{
+                            System.out.println("\nQuantos tickets deseja comprar? ");
+                            numerosTickets = s.nextInt();
+                            assert numerosTickets != 0;
+                        }while (numerosTickets <= 0);
+                        sessao5.sugereCadeiras(); //
+                        user.setNumeroTickets(numerosTickets);
                         numeroCadeira = new int[numerosTickets * 2];
                         numeroUnicoCadeira = new int[numerosTickets];
-
 
                         if (numerosTickets > 1) {
 
@@ -546,7 +580,9 @@ public class Compra {
                             numeroUnicoCadeira[cont] = numeroCadeira[0] * 5 + numeroCadeira[1];
                             cont++;
 
-                            if (sessao5.getCadeirasDisponiveis().length - numeroCadeira[1] < numerosTickets) {
+                            int tamanho = sessao5.getCadeirasDisponiveis().length + 1;
+
+                            if (tamanho - numeroCadeira[1] < numerosTickets) {
                                 for (int i = 0; i < numerosTickets - 1; i++) {
                                     numeroCadeira[cont * 2] = numeroCadeira[0];
                                     numeroCadeira[(cont * 2) + 1] = numeroCadeira[1] - cont;
@@ -713,7 +749,6 @@ public class Compra {
 
         if (returnAux == 0) {
             int cont = 0;
-//botar em tds
             System.out.println("\nVocê está na sessão 0");
             multiply = salasTipo[0].escolhaSuaSala();
             sessao0.exibeCadeiras();
@@ -726,7 +761,7 @@ public class Compra {
             user.setNumeroTickets(numerosTickets);
             numeroCadeira = new int[numerosTickets * 2];
             numeroUnicoCadeira = new int[numerosTickets];
-//
+
 
             if (numerosTickets > 1) {
 
@@ -737,9 +772,9 @@ public class Compra {
                 numeroUnicoCadeira[cont] = numeroCadeira[0] * 5 + numeroCadeira[1];
                 cont++;
 
-                int tamanho = sessao0.getCadeirasDisponiveis().length + 1; // botar em tds
+                int tamanho = sessao0.getCadeirasDisponiveis().length + 1;
 
-                if (tamanho - numeroCadeira[1] < numerosTickets) { //botar em tds
+                if (tamanho - numeroCadeira[1] < numerosTickets) {
                     for (int i = 0;i < numerosTickets - 1; i++) {
                         numeroCadeira[cont * 2] = numeroCadeira[0];
                         numeroCadeira[(cont * 2) + 1] = numeroCadeira[1] - cont;
@@ -754,7 +789,7 @@ public class Compra {
                         cont++;
                     }
                 }
-                user.setNumeroUnicoCadeira(numeroUnicoCadeira);//
+                user.setNumeroUnicoCadeira(numeroUnicoCadeira);
 
             } else {
                 for (int i = 0; i < numerosTickets; i++) {
@@ -765,7 +800,7 @@ public class Compra {
                     numeroUnicoCadeira[cont] = numeroCadeira[cont * 2] * 5 + numeroCadeira[(cont * 2) + 1];
                     cont++;
                 }
-                user.setNumeroUnicoCadeira(numeroUnicoCadeira);//
+                user.setNumeroUnicoCadeira(numeroUnicoCadeira);
             }
 
             sessao0.selecionaCadeira(numeroCadeira, numerosTickets);
@@ -808,12 +843,17 @@ public class Compra {
             user.setBilhete(bilhete);
 
         } else if (returnAux == 1) {
-            System.out.println("\nVocê está na sessão 1");
-            sessao1.exibeCadeiras();
             int cont = 0;
-            System.out.println("\nQuantos tickets deseja comprar? ");
-            numerosTickets = s.nextInt();
-            multiply = salasTipo[0].escolhaSuaSala();
+            System.out.println("\nVocê está na sessão 1");
+            multiply = salasTipo[1].escolhaSuaSala();
+            sessao1.exibeCadeiras();
+            do{
+                System.out.println("\nQuantos tickets deseja comprar? ");
+                numerosTickets = s.nextInt();
+                assert numerosTickets != 0;
+            }while (numerosTickets <= 0);
+            sessao1.sugereCadeiras(); //
+            user.setNumeroTickets(numerosTickets);
             numeroCadeira = new int[numerosTickets * 2];
             numeroUnicoCadeira = new int[numerosTickets];
 
@@ -827,7 +867,9 @@ public class Compra {
                 numeroUnicoCadeira[cont] = numeroCadeira[0] * 5 + numeroCadeira[1];
                 cont++;
 
-                if (sessao1.getCadeirasDisponiveis().length - numeroCadeira[1] < numerosTickets) {
+                int tamanho = sessao1.getCadeirasDisponiveis().length + 1;
+
+                if (tamanho - numeroCadeira[1] < numerosTickets) {
                     for (int i = 0;i < numerosTickets - 1; i++) {
                         numeroCadeira[cont * 2] = numeroCadeira[0];
                         numeroCadeira[(cont * 2) + 1] = numeroCadeira[1] - cont;
@@ -843,7 +885,7 @@ public class Compra {
                         cont++;
                     }
                 }
-                user.setNumeroUnicoCadeira(numeroUnicoCadeira);//
+                user.setNumeroUnicoCadeira(numeroUnicoCadeira);
 
             } else {
                 for (int i = 0; i < numerosTickets; i++) {
@@ -854,7 +896,7 @@ public class Compra {
                     numeroUnicoCadeira[cont] = numeroCadeira[cont * 2] * 5 + numeroCadeira[(cont * 2) + 1];
                     cont++;
                 }
-                user.setNumeroUnicoCadeira(numeroUnicoCadeira);//
+                user.setNumeroUnicoCadeira(numeroUnicoCadeira);
             }
 
             sessao1.selecionaCadeira(numeroCadeira, numerosTickets);
@@ -896,13 +938,17 @@ public class Compra {
             user.setSessao(sessao1);
             user.setBilhete(bilhete);
         } else if (returnAux == 2) {
-
-            System.out.println("\nVocê está na sessão 2");
-            sessao2.exibeCadeiras();
             int cont = 0;
-            System.out.println("\nQuantos tickets deseja comprar? ");
-            numerosTickets = s.nextInt();
-            multiply = salasTipo[0].escolhaSuaSala();
+            System.out.println("\nVocê está na sessão 2");
+            multiply = salasTipo[2].escolhaSuaSala();
+            sessao2.exibeCadeiras();
+            do{
+                System.out.println("\nQuantos tickets deseja comprar? ");
+                numerosTickets = s.nextInt();
+                assert numerosTickets != 0;
+            }while (numerosTickets <= 0);
+            sessao2.sugereCadeiras(); //
+            user.setNumeroTickets(numerosTickets);
             numeroCadeira = new int[numerosTickets * 2];
             numeroUnicoCadeira = new int[numerosTickets];
 
@@ -916,7 +962,9 @@ public class Compra {
                 numeroUnicoCadeira[cont] = numeroCadeira[0] * 5 + numeroCadeira[1];
                 cont++;
 
-                if (sessao2.getCadeirasDisponiveis().length - numeroCadeira[1] < numerosTickets) {
+                int tamanho = sessao2.getCadeirasDisponiveis().length + 1;
+
+                if (tamanho - numeroCadeira[1] < numerosTickets) {
                     for (int i = 0;i < numerosTickets - 1; i++) {
                         numeroCadeira[cont * 2] = numeroCadeira[0];
                         numeroCadeira[(cont * 2) + 1] = numeroCadeira[1] - cont;
@@ -985,13 +1033,17 @@ public class Compra {
             user.setSessao(sessao2);
             user.setBilhete(bilhete);
         } else if (returnAux == 3) {
-
-            System.out.println("\nVocê está na sessão 3");
-            sessao3.exibeCadeiras();
             int cont = 0;
-            System.out.println("\nQuantos tickets deseja comprar? ");
-            numerosTickets = s.nextInt();
-            multiply = salasTipo[0].escolhaSuaSala();
+            System.out.println("\nVocê está na sessão 3");
+            multiply = salasTipo[3].escolhaSuaSala();
+            sessao3.exibeCadeiras();
+            do{
+                System.out.println("\nQuantos tickets deseja comprar? ");
+                numerosTickets = s.nextInt();
+                assert numerosTickets != 0;
+            }while (numerosTickets <= 0);
+            sessao3.sugereCadeiras(); //
+            user.setNumeroTickets(numerosTickets);
             numeroCadeira = new int[numerosTickets * 2];
             numeroUnicoCadeira = new int[numerosTickets];
 
@@ -1005,7 +1057,9 @@ public class Compra {
                 numeroUnicoCadeira[cont] = numeroCadeira[0] * 5 + numeroCadeira[1];
                 cont++;
 
-                if (sessao3.getCadeirasDisponiveis().length - numeroCadeira[1] < numerosTickets) {
+                int tamanho = sessao3.getCadeirasDisponiveis().length + 1;
+
+                if (tamanho - numeroCadeira[1] < numerosTickets) {
                     for (int i = 0;i < numerosTickets - 1; i++) {
                         numeroCadeira[cont * 2] = numeroCadeira[0];
                         numeroCadeira[(cont * 2) + 1] = numeroCadeira[1] - cont;
@@ -1021,7 +1075,7 @@ public class Compra {
                         cont++;
                     }
                 }
-                user.setNumeroUnicoCadeira(numeroUnicoCadeira);//
+                user.setNumeroUnicoCadeira(numeroUnicoCadeira);
 
             } else {
                 for (int i = 0; i < numerosTickets; i++) {
@@ -1032,7 +1086,7 @@ public class Compra {
                     numeroUnicoCadeira[cont] = numeroCadeira[cont * 2] * 5 + numeroCadeira[(cont * 2) + 1];
                     cont++;
                 }
-                user.setNumeroUnicoCadeira(numeroUnicoCadeira);//
+                user.setNumeroUnicoCadeira(numeroUnicoCadeira);
             }
 
             sessao3.selecionaCadeira(numeroCadeira, numerosTickets);
@@ -1076,13 +1130,17 @@ public class Compra {
             user.setBilhete(bilhete);
 
         } else if (returnAux == 4) {
-
-            System.out.println("\nVocê está na sessão 4");
-            sessao4.exibeCadeiras();
             int cont = 0;
-            System.out.println("\nQuantos tickets deseja comprar? ");
-            numerosTickets = s.nextInt();
-            multiply = salasTipo[0].escolhaSuaSala();
+            System.out.println("\nVocê está na sessão 4");
+            multiply = salasTipo[4].escolhaSuaSala();
+            sessao4.exibeCadeiras();
+            do{
+                System.out.println("\nQuantos tickets deseja comprar? ");
+                numerosTickets = s.nextInt();
+                assert numerosTickets != 0;
+            }while (numerosTickets <= 0);
+            sessao4.sugereCadeiras(); //
+            user.setNumeroTickets(numerosTickets);
             numeroCadeira = new int[numerosTickets * 2];
             numeroUnicoCadeira = new int[numerosTickets];
 
@@ -1096,7 +1154,8 @@ public class Compra {
                 numeroUnicoCadeira[cont] = numeroCadeira[0] * 5 + numeroCadeira[1];
                 cont++;
 
-                if (sessao4.getCadeirasDisponiveis().length - numeroCadeira[1] < numerosTickets) {
+                int tamanho = sessao4.getCadeirasDisponiveis().length + 1;
+                if (tamanho - numeroCadeira[1] < numerosTickets) {
                     for (int i = 0;i < numerosTickets - 1; i++) {
                         numeroCadeira[cont * 2] = numeroCadeira[0];
                         numeroCadeira[(cont * 2) + 1] = numeroCadeira[1] - cont;
@@ -1112,7 +1171,7 @@ public class Compra {
                         cont++;
                     }
                 }
-                user.setNumeroUnicoCadeira(numeroUnicoCadeira);//
+                user.setNumeroUnicoCadeira(numeroUnicoCadeira);
 
             } else {
                 for (int i = 0; i < numerosTickets; i++) {
@@ -1123,7 +1182,7 @@ public class Compra {
                     numeroUnicoCadeira[cont] = numeroCadeira[cont * 2] * 5 + numeroCadeira[(cont * 2) + 1];
                     cont++;
                 }
-                user.setNumeroUnicoCadeira(numeroUnicoCadeira);//
+                user.setNumeroUnicoCadeira(numeroUnicoCadeira);
             }
 
             sessao4.selecionaCadeira(numeroCadeira, numerosTickets);
@@ -1166,13 +1225,17 @@ public class Compra {
             user.setBilhete(bilhete);
 
         } else if (returnAux == 5) {
-
-            System.out.println("\nVocê está na sessão 5");
-            sessao5.exibeCadeiras();
             int cont = 0;
-            System.out.println("\nQuantos tickets deseja comprar? ");
-            numerosTickets = s.nextInt();
-            multiply = salasTipo[0].escolhaSuaSala();
+            System.out.println("\nVocê está na sessão 5");
+            multiply = salasTipo[5].escolhaSuaSala();
+            sessao5.exibeCadeiras();
+            do{
+                System.out.println("\nQuantos tickets deseja comprar? ");
+                numerosTickets = s.nextInt();
+                assert numerosTickets != 0;
+            }while (numerosTickets <= 0);
+            sessao5.sugereCadeiras(); //
+            user.setNumeroTickets(numerosTickets);
             numeroCadeira = new int[numerosTickets * 2];
             numeroUnicoCadeira = new int[numerosTickets];
 
@@ -1186,7 +1249,9 @@ public class Compra {
                 numeroUnicoCadeira[cont] = numeroCadeira[0] * 5 + numeroCadeira[1];
                 cont++;
 
-                if (sessao5.getCadeirasDisponiveis().length - numeroCadeira[1] < numerosTickets) {
+                int tamanho = sessao5.getCadeirasDisponiveis().length + 1;
+
+                if (tamanho - numeroCadeira[1] < numerosTickets) {
                     for (int i = 0;i < numerosTickets - 1; i++) {
                         numeroCadeira[cont * 2] = numeroCadeira[0];
                         numeroCadeira[(cont * 2) + 1] = numeroCadeira[1] - cont;
@@ -1202,7 +1267,7 @@ public class Compra {
                         cont++;
                     }
                 }
-                user.setNumeroUnicoCadeira(numeroUnicoCadeira);//
+                user.setNumeroUnicoCadeira(numeroUnicoCadeira);
 
             } else {
                 for (int i = 0; i < numerosTickets; i++) {
@@ -1213,7 +1278,7 @@ public class Compra {
                     numeroUnicoCadeira[cont] = numeroCadeira[cont * 2] * 5 + numeroCadeira[(cont * 2) + 1];
                     cont++;
                 }
-                user.setNumeroUnicoCadeira(numeroUnicoCadeira);//
+                user.setNumeroUnicoCadeira(numeroUnicoCadeira);
             }
 
             sessao5.selecionaCadeira(numeroCadeira, numerosTickets);

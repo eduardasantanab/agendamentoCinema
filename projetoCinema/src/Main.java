@@ -48,6 +48,9 @@ public class Main {
                     int[] numCadAux = user1.getBilhete().getCadeira();//peguei o valor da cad anterior pelo bilhete
                     user1.alterar(user1, user1.getSessao(), response, user1.getNumeroTickets(), numCadAux, sala, aux);
                 }
+                if(response == 2){
+                    user1.dizBilhete();
+                }
 
                 if (response == 3) {
                     user1.getCompra().comprarItens(user1.getNumeroTickets());
@@ -60,7 +63,6 @@ public class Main {
                     user1.getSessao().exibeCadeiras();
                     break;
                 }
-//                user1.dizBilhete();
 
                 System.out.println("\nDeseja finalizar a compra?\n0: SIM\n1: NÃO");
                 P = s.nextInt();
@@ -76,6 +78,10 @@ public class Main {
 
                 if (response < 3 && response >= 0) {
                     user1.alterar(user1, user1.getSessao(), response, user1.getNumeroTickets(), user1.getNumeroCadeiraAux(), sala, aux);
+                }
+
+                if(response == 2){
+                    user1.dizBilhete();
                 }
 
                 if (response == 3) {
@@ -107,6 +113,10 @@ public class Main {
                     user1.alterar(user1, user1.getSessao(), response, user1.getNumeroTickets(), user1.getNumeroCadeiraAux(), sala, aux);
                 }
 
+                if(response == 2){
+                    user1.dizBilhete();
+                }
+
                 if (response == 3) {
                     user1.getCompra().comprarItens(user1.getNumeroTickets());
                 }
@@ -134,6 +144,10 @@ public class Main {
 
                 if (response < 3 && response >= 0) {
                     user1.alterar(user1, user1.getSessao(), response, user1.getNumeroTickets(), user1.getNumeroCadeiraAux(), sala, aux);
+                }
+
+                if(response == 2){
+                    user1.dizBilhete();
                 }
 
                 if (response == 3) {
@@ -165,6 +179,10 @@ public class Main {
                     user1.alterar(user1, user1.getSessao(), response, user1.getNumeroTickets(), user1.getNumeroCadeiraAux(), sala, aux);
                 }
 
+                if(response == 2){
+                    user1.dizBilhete();
+                }
+
                 if (response == 3) {
                     user1.getCompra().comprarItens(user1.getNumeroTickets());
                 }
@@ -192,6 +210,10 @@ public class Main {
 
                 if (response < 3 && response >= 0) {
                     user1.alterar(user1, user1.getSessao(), response, user1.getNumeroTickets(), user1.getNumeroCadeiraAux(), sala, aux);
+                }
+
+                if(response == 2){
+                    user1.dizBilhete();
                 }
 
                 if (response == 3) {
