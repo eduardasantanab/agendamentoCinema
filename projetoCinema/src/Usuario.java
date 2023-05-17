@@ -210,7 +210,7 @@ public class Usuario {
         return -1;
     }
 
-    public void alterar(Usuario usuario, Sessao sessao, int resp, int numTickets, int[] numAux, Sala sala, int numSala){
+    public void alterar(Usuario usuario, Sessao sessao, int resp, int numTickets, int[] baseNumUnicoAnterior, Sala sala, int numSala){
         int cont, adicional, remove, contador = 1;
 
         int[] numeroUnicoCadeira;
@@ -219,35 +219,60 @@ public class Usuario {
             cont = 0;
             System.out.println("\nQuantos tickets deseja adicionar? ");
             adicional = s.nextInt();
-            int[] numCadeira = new int[(numTickets + adicional)* 2];
-            int[] adicionadas = new int[numTickets + adicional];
+            int[] posCadeiras = new int[(numTickets + adicional)* 2];
+            int[] ticketsFinal = new int[numTickets + adicional];
             numeroUnicoCadeira = new int[numTickets + adicional];
 
             if(adicional > 1){
                 sessao.sugereCadeiras();
+
+                    System.out.println("\nEscolha o número da linha");
+                    posCadeiras[0] = s.nextInt();
+                    System.out.println("Escolha o número da coluna");
+                    posCadeiras[1] = s.nextInt();
+                    numeroUnicoCadeira[cont] = posCadeiras[0] * 5 + posCadeiras[1];
+                    cont++;
+
+                    if (sessao.getCadeirasDisponiveis().length - posCadeiras[1] < numTickets) {
+                        for (int i = 0;i < adicional - 1; i++) {
+                            posCadeiras[cont * 2] = posCadeiras[0];
+                            posCadeiras[(cont * 2) + 1] = posCadeiras[1] - cont;
+                            numeroUnicoCadeira[cont] = posCadeiras[cont * 2] * 5 + posCadeiras[(cont * 2) + 1];
+                            cont++;
+                        }
+                    }
+                    else {
+                        for (int i = 0; i < adicional - 1; i++) {
+                            posCadeiras[cont * 2] = posCadeiras[0];
+                            posCadeiras[(cont * 2) + 1] = posCadeiras[1] + cont;
+                            numeroUnicoCadeira[cont] = posCadeiras[cont * 2] * 5 + posCadeiras[(cont * 2) + 1];
+                            cont++;
+                        }
+                    }
+                setNumeroUnicoCadeira(numeroUnicoCadeira);//
+                } else { //se for menor que 2 de adicionais
+                for (int i = 0; i < adicional; i++) {
+                    System.out.println("\nEscolha o número da linha");
+                    posCadeiras[cont * 2] = s.nextInt();
+                    System.out.println("Escolha o número da coluna");
+                    posCadeiras[(cont * 2) + 1] = s.nextInt();
+                    numeroUnicoCadeira[cont] = posCadeiras[cont * 2] * 5 + posCadeiras[(cont * 2) + 1];
+                    cont++;
+                }
             }
 
-            for (int i = 0; i < adicional; i++) {
-                System.out.println("\nEscolha o número da linha");
-                numCadeira[cont * 2] = s.nextInt();
-                System.out.println("Escolha o número da coluna");
-                numCadeira[(cont * 2) + 1] = s.nextInt();
-                numeroUnicoCadeira[cont] = numCadeira[cont * 2] * 5 + numCadeira[(cont * 2) + 1];
-                cont++;
+            sessao.selecionaCadeira(posCadeiras, (numTickets+adicional));
+
+            for (int i = 0; i < baseNumUnicoAnterior.length; i++) {
+                ticketsFinal[i] = baseNumUnicoAnterior[i]; //numAux é o numero unico da cadeira antes de alterar, para ser cumulativo
             }
 
-            sessao.selecionaCadeira(numCadeira, (numTickets+adicional));
-
-            for (int i = 0; i < numAux.length; i++) {
-                adicionadas[i] = numAux[i];
-            }
-
-            for (int i = numAux.length; i < (numTickets+adicional); i++) {
-                adicionadas[i] = numeroUnicoCadeira[adicional-contador];
+            for (int i = baseNumUnicoAnterior.length; i < (numTickets+adicional); i++) {
+                ticketsFinal[i] = numeroUnicoCadeira[adicional-contador];
                 contador++;
             }
 
-            bilhete = new Bilhete(usuario, numSala, sessao, sala.getOneFilme(numSala), (25.0 * (numTickets+adicional)), adicionadas);
+            bilhete = new Bilhete(usuario, numSala, sessao, sala.getOneFilme(numSala), (25.0 * (numTickets+adicional)), ticketsFinal);
             usuario.setNumeroTickets(numTickets + adicional);
             sessao.exibeCadeiras();
             usuario.setBilhete(bilhete);
@@ -258,31 +283,48 @@ public class Usuario {
             System.out.println("\nQuantos tickets deseja remover? ");
             remove = s.nextInt();
             int[] posicao = new int[remove];
-            int[] removidas = new int[numTickets - remove];
+            int[] remocao = new int[numTickets];
+            int[] resultado = new int[numTickets - remove];
 
-            if (remove <= numTickets){
-                for(int i = 0; i < remove; i++){
-                    System.out.println("\nEscolha o numero da " + (i+1) + "ª cadeira que deseja remover: ");
-                    posicao[i] = s.nextInt();
-                    for(int j = 0; j < numTickets; j++){
-                        if(posicao[i] != numAux[j]){
-                            removidas[cont] = numAux[j];
-                            cont++;
+
+            if(remove == numTickets){
+                cancelarCompra();
+            }else {
+                System.out.println("\n[Cadeiras do bilhete atual]");
+                for (int i = 0; i < baseNumUnicoAnterior.length; i++) {
+                    System.out.println("Número: " + baseNumUnicoAnterior[i]);
+                }
+
+                if (remove <= numTickets){
+                    for(int i = 0; i < remove; i++){
+                        System.out.println("\nEscolha o número da cadeira que deseja remover: ");
+                        posicao[i] = s.nextInt();
+                        cont = 0;
+                        for(int j = 0; j < numTickets; j++){
+                            if(posicao[i] != baseNumUnicoAnterior[j]){
+                                baseNumUnicoAnterior[cont] = baseNumUnicoAnterior[j];
+                                cont++;
+                            }
                         }
                     }
                 }
-            }
 
-            usuario.setNumeroTickets(numTickets - remove);
-            bilhete = new Bilhete(usuario, numSala, sessao, sala.getOneFilme(numSala), (25.0 * (numTickets - remove)), removidas);
-            sessao.cancelarCadeira(removidas);
-            sessao.exibeCadeiras();
-            usuario.setBilhete(bilhete);
-            usuario.dizBilhete();
+                for (int i = 0; i < resultado.length; i++) {
+                    resultado[i] = baseNumUnicoAnterior[i];
+                }
+
+                usuario.setNumeroTickets(numTickets - remove);
+                bilhete = new Bilhete(usuario, numSala, sessao, sala.getOneFilme(numSala), (25.0 * (numTickets - remove)), resultado);
+                sessao.cancelarCadeira(posicao);
+                sessao.exibeCadeiras();
+                usuario.setBilhete(bilhete);
+                usuario.dizBilhete();
+            }
         }
     }
     public void cancelarCompra(){
         setBilhete(null);
         setNumeroTickets(0);
+        System.out.println("O bilhete foi removido com sucesso!");
     }
 }

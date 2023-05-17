@@ -37,7 +37,7 @@ public class Main {
             if (aux == 0) {
 
                 System.out.println("\nDeseja alterar sua escolha?");
-                System.out.println("0: Adiconar Ticket");
+                System.out.println("0: Adicionar Ticket");
                 System.out.println("1: Remover Ticket");
                 System.out.println("2: Não desejo alterar");
                 System.out.println("3: Adicionar lanche");
@@ -45,7 +45,8 @@ public class Main {
                 response = s.nextInt();
 
                 if (response < 3 && response >= 0) {
-                    user1.alterar(user1, user1.getSessao(), response, user1.getNumeroTickets(), user1.getNumeroCadeiraAux(), sala, aux);
+                    int[] numCadAux = user1.getBilhete().getCadeira();//peguei o valor da cad anterior pelo bilhete
+                    user1.alterar(user1, user1.getSessao(), response, user1.getNumeroTickets(), numCadAux, sala, aux);
                 }
 
                 if (response == 3) {
@@ -59,7 +60,7 @@ public class Main {
                     user1.getSessao().exibeCadeiras();
                     break;
                 }
-                user1.dizBilhete();
+//                user1.dizBilhete();
 
                 System.out.println("\nDeseja finalizar a compra?\n0: SIM\n1: NÃO");
                 P = s.nextInt();

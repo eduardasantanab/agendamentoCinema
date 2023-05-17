@@ -1,7 +1,7 @@
 public class Sessao {
 
     private String filme;
-    private String[][] cadeirasDisponiveis = new String[10][15];
+    private String[][] cadeirasDisponiveis = new String[2][3];
     private String ocupado = "[X]";
     private String disponivel = "[]";
 
@@ -51,7 +51,7 @@ public class Sessao {
 
         for (int i = 0; i < this.cadeirasDisponiveis.length; i++) {
             for (int j = 0; j < this.cadeirasDisponiveis[0].length; j++) {
-                if(this.cadeirasDisponiveis[i][j] == null){
+                if (this.cadeirasDisponiveis[i][j] == null) {
                     this.cadeirasDisponiveis[i][j] = "[]";
                 }
                 System.out.print(this.cadeirasDisponiveis[i][j]);
@@ -69,9 +69,7 @@ public class Sessao {
                 int linha = numeroUnicoCadeira[j] / 5;
                 int coluna = numeroUnicoCadeira[j] % 5;
 
-                if (i == linha && j == coluna) {
-                    cadeirasDisponiveis[i][j] = disponivel;
-                }
+                cadeirasDisponiveis[linha][coluna] = disponivel;
             }
         }
     }
@@ -97,60 +95,64 @@ public class Sessao {
     public void selecionaCadeira(int[] posicao, int numBilhetes) {
         ocupado = "[X]";
 
-        if (numBilhetes == 1) {
-            for (int i = 0; i < cadeirasDisponiveis.length; i++) {
-                for (int j = 0; j < cadeirasDisponiveis[i].length; j++) {
-                    if (i == posicao[0] && j == posicao[1]) {
-                        if (cadeirasDisponiveis[i][j].equals(ocupado)) {
-                            System.out.println("Esta cadeira já está ocupada");
-                            return;
+        try {
+            if (numBilhetes == 1) {
+                for (int i = 0; i < cadeirasDisponiveis.length; i++) {
+                    for (int j = 0; j < cadeirasDisponiveis[i].length; j++) {
+                        if (i == posicao[0] && j == posicao[1]) {
+                            if (cadeirasDisponiveis[i][j].equals(ocupado)) {
+                                throw new VendasException("Esta cadeira já está ocupada");
+                            }
+                            this.cadeirasDisponiveis[i][j] = ocupado;
                         }
-                        this.cadeirasDisponiveis[i][j] = ocupado;
                     }
                 }
-            }
-        } else if (numBilhetes > 1) {
-            int aux = 0;
-            int cont1, cont2;
-            for (int i = 0; i < cadeirasDisponiveis.length; i++) {
-                for (int j = 0; j < cadeirasDisponiveis[i].length; j++) {
+            } else if (numBilhetes > 1) {
+                int aux = 0;
+                int cont1, cont2;
+                for (int i = 0; i < cadeirasDisponiveis.length; i++) {
+                    for (int j = 0; j < cadeirasDisponiveis[i].length; j++) {
+                        if (aux * 2 >= posicao.length) {
+                            return;
+                        }
+                        int tamanho = this.getCadeirasDisponiveis().length + 1; //numero de colunas
+
+                        if (tamanho - j < numBilhetes) {
+                            cont1 = posicao[aux * 2];
+                            cont2 = posicao[(aux * 2) + 1];
+                            if (i == posicao[cont1] && j == posicao[cont2]) {
+                                for (int m = 0; m < numBilhetes; m++) {
+                                    this.cadeirasDisponiveis[cont1][cont2] = ocupado;
+                                    cont2--;
+                                }
+                            }
+                        } else { //botei
+                            if (i == posicao[aux * 2] && j == posicao[(aux * 2) + 1]) {
+                                cont1 = posicao[aux * 2];
+                                cont2 = posicao[(aux * 2) + 1];
+                                for (int k = 0; k < numBilhetes; k++) {
+                                    this.cadeirasDisponiveis[cont1][cont2] = ocupado;
+                                    cont2++;
+                                }
+                                aux++;
+                            }
+                        }
+
+                        if (cadeirasDisponiveis[i][j].equals(ocupado)) {
+                            return;
+                        }
+                    }
+
                     if (aux * 2 >= posicao.length) {
                         return;
                     }
-
-                    if (getCadeirasDisponiveis().length - j < numBilhetes) {
-                        cont1 = posicao[aux * 2];
-                        cont2 = posicao[(aux * 2) + 1];
-                        if (i == posicao[cont1] && j == posicao[cont2]) {
-                            for (int m = 0; m < numBilhetes; m++) {
-                                this.cadeirasDisponiveis[cont1][cont2] = ocupado;
-                                cont2--;
-                            }
-                        }
-                    }
-
-                    if (i == posicao[aux * 2] && j == posicao[(aux * 2) + 1]) {
-                        cont1 = posicao[aux * 2];
-                        cont2 = posicao[(aux * 2) + 1];
-                        //this.cadeirasDisponiveis[i][j] = ocupado;
-                        for (int k = 0; k < numBilhetes; k++) {
-                            this.cadeirasDisponiveis[cont1][cont2] = ocupado;
-                            cont2++;
-                        }
-                        aux++;
-                    }
-
-                    if (cadeirasDisponiveis[i][j].equals(ocupado)) {
-                        return;
-                    }
                 }
-
-                if (aux * 2 >= posicao.length) {
-                    return;
-                }
+            } else {
+                throw new VendasException("Escolha uma quantidade possível!");
             }
-        } else {
-            System.out.println("Escolha uma quantidade possível!");
+        } catch (VendasException ex) {
+            System.out.println("Erro de seleção: " + ex.getMessage());
+
         }
     }
 }
