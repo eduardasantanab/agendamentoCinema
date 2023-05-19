@@ -1,6 +1,6 @@
 import java.util.Scanner;
 class Estudante extends Usuario {
-    private Compra compra = new Compra();
+    private Compra compra;
     private int numeroTickets = 0;
     Scanner s;
 
@@ -10,7 +10,8 @@ class Estudante extends Usuario {
     }
 
     @Override
-    public int comprar(){
+    public int comprar(Sala sala) throws IndisponivelException {
+        compra = new Compra(sala);
         int aux;
         System.out.println("\nMENU");
         System.out.println("0: Comprar Comida");
@@ -22,7 +23,7 @@ class Estudante extends Usuario {
         } while (aux != 0 && aux != 1);
 
         if(aux == 0){
-            this.compra.comprarItens(this.numeroTickets);
+            this.compra.comprarItens(sala, this, this.getNumeroTickets());
         } else {
             aux = this.compra.comprarTicket(this);
             this.compra.getBilhete().setValor(getBilhete().getValor() * 0.5);
@@ -33,6 +34,4 @@ class Estudante extends Usuario {
         }
         return -1;
     }
-
-
 }

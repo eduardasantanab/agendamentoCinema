@@ -1,9 +1,9 @@
 public enum Produtos{
-    REFRIGERANTE("Refrigerante", 40),
-    PIPOCA("Pipoca", 30),
-    CHOCOLATE("Chocolate", 20),
-    MAXSTELL("Maxstell", 50),
-    BARBIE("Barbie", 60);
+    REFRIGERANTE("Refrigerante", 10),
+    PIPOCA("Pipoca", 40),
+    CHOCOLATE("Chocolate", 12),
+    CHIPS("Chips", 18),
+    SORVETE("Sorvete", 23);
 
     private String nome;
     private double valor;

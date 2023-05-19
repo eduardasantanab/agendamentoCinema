@@ -8,8 +8,17 @@ public class Critico extends Usuario {
         this.origem = origem;
     }
 
+    public String getOrigem() {
+        return origem;
+    }
+
+    public void setOrigem(String origem) {
+        this.origem = origem;
+    }
+
+
     @Override
-    public int comprar(){
+    public int comprar(Sala sala) throws IndisponivelException {
         int aux;
         Scanner s = new Scanner(System.in);
         System.out.println("\nMENU");
@@ -22,7 +31,7 @@ public class Critico extends Usuario {
         } while (aux != 0 && aux != 1);
 
         if(aux == 0){
-            this.compra.comprarItens(super.getNumeroTickets());
+            this.compra.comprarItens(sala, this, this.getNumeroTickets());
         } else {
             aux = this.compra.comprarTicket(this);
             this.compra.getBilhete().setValor(getBilhete().getValor() * 0);
@@ -45,9 +54,11 @@ public class Critico extends Usuario {
 
     public void atribuirCritica(String critica, Filme filme){
         Critica critica2 = new Critica(super.getNome(), this.origem, critica);
+        Critica[] vetCritica = new Critica[filme.getQuatidadeCriticos()];
 
-        filme.atibuirUmaCritica(critica2);
-
+        for (int i = 0; i < filme.getQuatidadeCriticos(); i++) {
+            vetCritica[i] = critica2;
+        }
+        filme.setCritica(vetCritica);
     }
-
 }

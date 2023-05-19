@@ -12,7 +12,7 @@ public class Usuario {
     private String codigoVerificadorCartao;
     private Scanner s;
     private Bilhete bilhete;
-    private Compra compra = new Compra();
+    private Compra compra;
     private int numeroTickets = 0;
     private int[] numeroCadeiraaux;
     private int[] numeroUnicoCadeira;
@@ -189,8 +189,9 @@ public class Usuario {
     }
 
 
-    public int comprar(){
+    public int comprar(Sala sala) throws IndisponivelException {
         int aux;
+        compra = new Compra(sala);
         System.out.println("\nMENU");
         System.out.println("0: Comprar Comida");
         System.out.println("1: Comprar Tickets");
@@ -201,7 +202,7 @@ public class Usuario {
         } while (aux != 0 && aux != 1);
 
         if(aux == 0){
-            this.compra.comprarItens(this.numeroTickets);
+            this.compra.comprarItens(sala, this, numeroTickets);
         } else {
             aux = this.compra.comprarTicket(this);
             return aux;
@@ -210,7 +211,7 @@ public class Usuario {
         return -1;
     }
 
-    public void alterar(Usuario usuario, Sessao sessao, int resp, int numTickets, int[] baseNumUnicoAnterior, Sala sala, int numSala){
+    public void alterar(Usuario usuario, Sessao sessao, int resp, int numTickets, int[] baseNumUnicoAnterior, Sala sala, int numSala) throws IndisponivelException {
         int cont, adicional, remove, contador = 1;
 
         int[] numeroUnicoCadeira;
@@ -224,33 +225,33 @@ public class Usuario {
             numeroUnicoCadeira = new int[numTickets + adicional];
 
             if(adicional > 1){
-                sessao.sugereCadeiras();
+                sessao.sugereCadeiras(adicional); //
 
-                    System.out.println("\nEscolha o número da linha");
-                    posCadeiras[0] = s.nextInt();
-                    System.out.println("Escolha o número da coluna");
-                    posCadeiras[1] = s.nextInt();
-                    numeroUnicoCadeira[cont] = posCadeiras[0] * 5 + posCadeiras[1];
-                    cont++;
+                System.out.println("\nEscolha o número da linha");
+                posCadeiras[0] = s.nextInt();
+                System.out.println("Escolha o número da coluna");
+                posCadeiras[1] = s.nextInt();
+                numeroUnicoCadeira[cont] = posCadeiras[0] * 5 + posCadeiras[1];
+                cont++;
 
-                    if (sessao.getCadeirasDisponiveis().length - posCadeiras[1] < numTickets) {
-                        for (int i = 0;i < adicional - 1; i++) {
-                            posCadeiras[cont * 2] = posCadeiras[0];
-                            posCadeiras[(cont * 2) + 1] = posCadeiras[1] - cont;
-                            numeroUnicoCadeira[cont] = posCadeiras[cont * 2] * 5 + posCadeiras[(cont * 2) + 1];
-                            cont++;
-                        }
+                if (sessao.getCadeirasDisponiveis().length - posCadeiras[1] < numTickets) {
+                    for (int i = 0;i < adicional - 1; i++) {
+                        posCadeiras[cont * 2] = posCadeiras[0];
+                        posCadeiras[(cont * 2) + 1] = posCadeiras[1] - cont;
+                        numeroUnicoCadeira[cont] = posCadeiras[cont * 2] * 5 + posCadeiras[(cont * 2) + 1];
+                        cont++;
                     }
-                    else {
-                        for (int i = 0; i < adicional - 1; i++) {
-                            posCadeiras[cont * 2] = posCadeiras[0];
-                            posCadeiras[(cont * 2) + 1] = posCadeiras[1] + cont;
-                            numeroUnicoCadeira[cont] = posCadeiras[cont * 2] * 5 + posCadeiras[(cont * 2) + 1];
-                            cont++;
-                        }
+                }
+                else {
+                    for (int i = 0; i < adicional - 1; i++) {
+                        posCadeiras[cont * 2] = posCadeiras[0];
+                        posCadeiras[(cont * 2) + 1] = posCadeiras[1] + cont;
+                        numeroUnicoCadeira[cont] = posCadeiras[cont * 2] * 5 + posCadeiras[(cont * 2) + 1];
+                        cont++;
                     }
+                }
                 setNumeroUnicoCadeira(numeroUnicoCadeira);//
-                } else { //se for menor que 2 de adicionais
+            } else { //se for menor que 2 de adicionais
                 for (int i = 0; i < adicional; i++) {
                     System.out.println("\nEscolha o número da linha");
                     posCadeiras[cont * 2] = s.nextInt();
@@ -261,7 +262,7 @@ public class Usuario {
                 }
             }
 
-            sessao.selecionaCadeira(posCadeiras, (numTickets+adicional));
+            sessao.selecionaCadeira(posCadeiras, adicional);
 
             for (int i = 0; i < baseNumUnicoAnterior.length; i++) {
                 ticketsFinal[i] = baseNumUnicoAnterior[i]; //numAux é o numero unico da cadeira antes de alterar, para ser cumulativo

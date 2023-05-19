@@ -1,15 +1,46 @@
+import java.util.Objects;
+
 public class Sessao {
 
     private String filme;
-    private String[][] cadeirasDisponiveis = new String[2][3];
+    private String[][] cadeirasDisponiveis = new String[10][15];
     private String ocupado = "[X]";
     private String disponivel = "[]";
 
 
     public Sessao() {
         for (int i = 0; i < cadeirasDisponiveis.length; i++) {
-            for (int j = 0; j < cadeirasDisponiveis.length; j++) {
+            for (int j = 0; j < cadeirasDisponiveis[i].length; j++) {
                 this.cadeirasDisponiveis[i][j] = disponivel;
+            }
+        }
+
+        cadeirasDisponiveis[6][8] = ocupado;
+        cadeirasDisponiveis[6][10] = ocupado;
+
+        for (int i = 3; i < 4; i++) {
+            for (int j = 4; j < 8; j++) {
+                this.cadeirasDisponiveis[i][j] = ocupado;
+            }
+        }
+        for (int i = 5; i < 6; i++) {
+            for (int j = 2; j < 4; j++) {
+                this.cadeirasDisponiveis[i][j] = ocupado;
+            }
+        }
+        for (int i = 8; i < 9; i++) {
+            for (int j = 8; j < 11; j++) {
+                this.cadeirasDisponiveis[i][j] = ocupado;
+            }
+        }
+        for (int i = 1; i < 2; i++) {
+            for (int j = 8; j < 10; j++) {
+                this.cadeirasDisponiveis[i][j] = ocupado;
+            }
+        }
+        for (int i = 1; i < 2; i++) {
+            for (int j = 0; j < 4; j++) {
+                this.cadeirasDisponiveis[i][j] = ocupado;
             }
         }
     }
@@ -74,85 +105,112 @@ public class Sessao {
         }
     }
 
-    public void sugereCadeiras() {
+    public void sugereCadeiras(int numTickets) {
+        int cont;
+
         for (int i = 0; i < getCadeirasDisponiveis().length; i++) {
+            cont = 0;
+            for (int j = 0; j < cadeirasDisponiveis[i].length; j++) {
+                if((j + numTickets) >= (cadeirasDisponiveis[i].length)){
+                    cadeirasDisponiveis[i][j] = "[.]";
+                }
+                for (int k = 0; k < numTickets; k++) {
+                    if(Objects.equals(cadeirasDisponiveis[i][j], disponivel)){
+                        cadeirasDisponiveis[i][j] = "[$]";
+                        cont++;
+                        if(cont == numTickets){
+                            if(j < cadeirasDisponiveis[i].length - 1){
+                                cadeirasDisponiveis[i][j + 1] = "[.]";
+                                cont = 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        for (int i = 0; i < cadeirasDisponiveis.length; i++) {
             System.out.println();
             for (int j = 0; j < cadeirasDisponiveis[i].length - 1; j++) {
-                if (cadeirasDisponiveis[i][j].equals("[]") && cadeirasDisponiveis[i][j + 1].equals("[]")) {
-                    cadeirasDisponiveis[i][j] = "[$]";
-                    cadeirasDisponiveis[i][j + 1] = "[$]";
-                    System.out.print(cadeirasDisponiveis[i][j + 1]);
-                } else if (cadeirasDisponiveis[i][j].equals("[$]") && cadeirasDisponiveis[i][j + 1].equals("[]")) {
-                    cadeirasDisponiveis[i][j + 1] = "[$]";
-                } else if (cadeirasDisponiveis[i][j].equals("[X]") && cadeirasDisponiveis[i][j + 1].equals("[]")) {
-                    cadeirasDisponiveis[i][j + 1] = "[]";
-                }
                 System.out.print(cadeirasDisponiveis[i][j]);
             }
         }
+
+//        for (int i = 0; i < getCadeirasDisponiveis().length; i++) {
+//            System.out.println();
+//            for (int j = 0; j < cadeirasDisponiveis[i].length - 1; j++) {
+//                if (cadeirasDisponiveis[i][j].equals("[]") && cadeirasDisponiveis[i][j + 1].equals("[]")) {
+//                    cadeirasDisponiveis[i][j] = "[$]";
+//                    cadeirasDisponiveis[i][j + 1] = "[$]";
+//                    System.out.print(cadeirasDisponiveis[i][j + 1]);
+//                } else if (cadeirasDisponiveis[i][j].equals("[$]") && cadeirasDisponiveis[i][j + 1].equals("[]")) {
+//                    cadeirasDisponiveis[i][j + 1] = "[$]";
+//                } else if (cadeirasDisponiveis[i][j].equals("[X]") && cadeirasDisponiveis[i][j + 1].equals("[]")) {
+//                    cadeirasDisponiveis[i][j + 1] = "[]";
+//                }
+//                System.out.print(cadeirasDisponiveis[i][j]);
+//            }
+//        }
     }
 
-    public void selecionaCadeira(int[] posicao, int numBilhetes) {
+    public void selecionaCadeira(int[] posicao, int numBilhetes) throws IndisponivelException{
         ocupado = "[X]";
 
-        try {
-            if (numBilhetes == 1) {
-                for (int i = 0; i < cadeirasDisponiveis.length; i++) {
-                    for (int j = 0; j < cadeirasDisponiveis[i].length; j++) {
-                        if (i == posicao[0] && j == posicao[1]) {
-                            if (cadeirasDisponiveis[i][j].equals(ocupado)) {
-                                throw new VendasException("Esta cadeira já está ocupada");
-                            }
-                            this.cadeirasDisponiveis[i][j] = ocupado;
+        if (numBilhetes == 1) {
+            for (int i = 0; i < cadeirasDisponiveis.length; i++) {
+                for (int j = 0; j < cadeirasDisponiveis[i].length; j++) {
+                    if (i == posicao[0] && j == posicao[1]) {
+                        if (cadeirasDisponiveis[i][j].equals(ocupado)) {
+                            IndisponivelException ex;
+                            ex = new IndisponivelException();
+                            throw ex;
                         }
+                        this.cadeirasDisponiveis[i][j] = ocupado;
                     }
                 }
-            } else if (numBilhetes > 1) {
-                int aux = 0;
-                int cont1, cont2;
-                for (int i = 0; i < cadeirasDisponiveis.length; i++) {
-                    for (int j = 0; j < cadeirasDisponiveis[i].length; j++) {
-                        if (aux * 2 >= posicao.length) {
-                            return;
-                        }
-                        int tamanho = this.getCadeirasDisponiveis().length + 1; //numero de colunas
-
-                        if (tamanho - j < numBilhetes) {
-                            cont1 = posicao[aux * 2];
-                            cont2 = posicao[(aux * 2) + 1];
-                            if (i == posicao[cont1] && j == posicao[cont2]) {
-                                for (int m = 0; m < numBilhetes; m++) {
-                                    this.cadeirasDisponiveis[cont1][cont2] = ocupado;
-                                    cont2--;
-                                }
-                            }
-                        } else { //botei
-                            if (i == posicao[aux * 2] && j == posicao[(aux * 2) + 1]) {
-                                cont1 = posicao[aux * 2];
-                                cont2 = posicao[(aux * 2) + 1];
-                                for (int k = 0; k < numBilhetes; k++) {
-                                    this.cadeirasDisponiveis[cont1][cont2] = ocupado;
-                                    cont2++;
-                                }
-                                aux++;
-                            }
-                        }
-
-                        if (cadeirasDisponiveis[i][j].equals(ocupado)) {
-                            return;
-                        }
-                    }
-
+            }
+        } else if (numBilhetes > 1) {
+            int aux = 0;
+            int cont1, cont2;
+            for (int i = 0; i < cadeirasDisponiveis.length; i++) {
+                for (int j = 0; j < cadeirasDisponiveis[i].length; j++) {
                     if (aux * 2 >= posicao.length) {
                         return;
                     }
-                }
-            } else {
-                throw new VendasException("Escolha uma quantidade possível!");
-            }
-        } catch (VendasException ex) {
-            System.out.println("Erro de seleção: " + ex.getMessage());
+                    int tamanho = this.getCadeirasDisponiveis().length + 1; //numero de colunas
 
+                    if (tamanho - j < numBilhetes) {
+                        cont1 = posicao[aux * 2];
+                        cont2 = posicao[(aux * 2) + 1];
+                        if (i == posicao[cont1] && j == posicao[cont2]) {
+                            for (int m = 0; m < numBilhetes; m++) {
+                                this.cadeirasDisponiveis[cont1][cont2] = ocupado;
+                                cont2--;
+                            }
+                        }
+                    } else {
+                        if (i == posicao[aux * 2] && j == posicao[(aux * 2) + 1]) {
+                            cont1 = posicao[aux * 2];
+                            cont2 = posicao[(aux * 2) + 1];
+                            for (int k = 0; k < numBilhetes; k++) {
+                                this.cadeirasDisponiveis[cont1][cont2] = ocupado;
+                                cont2++;
+                            }
+                            aux++;
+                        }
+                    }
+                    if (cadeirasDisponiveis[posicao[0]][posicao[1]].equals(ocupado)) {
+                        return;
+                    }
+                }
+
+                if (aux * 2 >= posicao.length) {
+                    return;
+                }
+            }
+        } else {
+            throw new IndisponivelException();
         }
     }
 }

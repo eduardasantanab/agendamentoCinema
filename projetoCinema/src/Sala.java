@@ -4,9 +4,7 @@ public class Sala {
     private int filmesAdicionados = 0;
 
 
-    public Sala() {
-//   terminar
-    }
+    public Sala() {}
 
     public Sessao[] getPoltronasPorSessao() {
         return poltronasPorSessao;

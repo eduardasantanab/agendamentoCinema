@@ -1,8 +1,11 @@
 import java.time.LocalTime;
-public class Hora {
-    public Hora() {
+
+public class ForaHorarioException extends Exception {
+
+    public ForaHorarioException() {
+        super("Fora do horario do filme");
     }
-    public int compare(String faixaDeHorario){
+    public int foraHorario(String faixaDeHorario){
         String faixaHorarioString = faixaDeHorario;
         String[] faixaHorarioParts = faixaHorarioString.split(" - ");
         String horarioInicioString = faixaHorarioParts[0];

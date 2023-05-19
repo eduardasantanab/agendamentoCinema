@@ -7,6 +7,7 @@ public class Filme {
     private double nota;
     private int quatidadeCriticos = 0;
     private Critica criticas[] = new Critica[100];
+    private boolean emCartaz = true;
 
     public Filme(String nomeDoFilme, String duracaoFilme, String sinopse, double valor){
         this.nomeDoFilme = nomeDoFilme;
@@ -33,6 +34,14 @@ public class Filme {
 
     public String getSinopse() {
         return sinopse;
+    }
+
+    public boolean isEmCartaz() {
+        return emCartaz;
+    }
+
+    public void setEmCartaz(boolean emCartaz) {
+        this.emCartaz = emCartaz;
     }
 
     public void setSinopse(String sinopse) {
@@ -77,6 +86,6 @@ public class Filme {
 
     public void exibirMedia() {
         double media = nota / quatidadeCriticos;
-        System.out.println("A média do filme" + getNomeDoFilme() + " é: "+ media);
+        System.out.println("A média do filme " + getNomeDoFilme() + " é: "+ media);
     }
 }
