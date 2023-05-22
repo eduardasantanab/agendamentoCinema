@@ -15,6 +15,7 @@ public class Sessao {
             }
         }
 
+//      cadeiras pré selecionadas
         cadeirasDisponiveis[6][8] = ocupado;
         cadeirasDisponiveis[6][10] = ocupado;
 
@@ -43,6 +44,7 @@ public class Sessao {
                 this.cadeirasDisponiveis[i][j] = ocupado;
             }
         }
+//
     }
 
     public String getFilme() {
@@ -100,7 +102,7 @@ public class Sessao {
                 int linha = numeroUnicoCadeira[j] / 5;
                 int coluna = numeroUnicoCadeira[j] % 5;
 
-                cadeirasDisponiveis[linha][coluna] = disponivel;
+                cadeirasDisponiveis[linha][coluna] = "[$]";
             }
         }
     }
@@ -136,22 +138,6 @@ public class Sessao {
                 System.out.print(cadeirasDisponiveis[i][j]);
             }
         }
-
-//        for (int i = 0; i < getCadeirasDisponiveis().length; i++) {
-//            System.out.println();
-//            for (int j = 0; j < cadeirasDisponiveis[i].length - 1; j++) {
-//                if (cadeirasDisponiveis[i][j].equals("[]") && cadeirasDisponiveis[i][j + 1].equals("[]")) {
-//                    cadeirasDisponiveis[i][j] = "[$]";
-//                    cadeirasDisponiveis[i][j + 1] = "[$]";
-//                    System.out.print(cadeirasDisponiveis[i][j + 1]);
-//                } else if (cadeirasDisponiveis[i][j].equals("[$]") && cadeirasDisponiveis[i][j + 1].equals("[]")) {
-//                    cadeirasDisponiveis[i][j + 1] = "[$]";
-//                } else if (cadeirasDisponiveis[i][j].equals("[X]") && cadeirasDisponiveis[i][j + 1].equals("[]")) {
-//                    cadeirasDisponiveis[i][j + 1] = "[]";
-//                }
-//                System.out.print(cadeirasDisponiveis[i][j]);
-//            }
-//        }
     }
 
     public void selecionaCadeira(int[] posicao, int numBilhetes) throws IndisponivelException{
@@ -178,7 +164,7 @@ public class Sessao {
                     if (aux * 2 >= posicao.length) {
                         return;
                     }
-                    int tamanho = cadeirasDisponiveis[i].length; //numero de colunas
+                    int tamanho = cadeirasDisponiveis[i].length;
 
                     if (tamanho - j < numBilhetes) {
                         cont1 = posicao[aux * 2];

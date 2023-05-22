@@ -16,7 +16,7 @@ public class Main {
         adm.emCartaz("Duna");
         sala.exibeFilmes();
 
-        adm.excluirFilme("Duna");
+        adm.excluirFilme("Pantera Negra");
         sala.exibeFilmes();
 
         int aux, response;
@@ -75,7 +75,6 @@ public class Main {
                         user1.getSessao().exibeCadeiras();
                         break;
                     }
-
                 } else if (aux == 1) {
 
                     System.out.println("\nDeseja alterar sua escolha?");
@@ -87,7 +86,8 @@ public class Main {
                     response = s.nextInt();
 
                     if (response < 3 && response >= 0) {
-                        user1.alterar(user1, user1.getSessao(), response, user1.getNumeroTickets(), user1.getNumeroCadeiraAux(), sala, aux);
+                        int[] numCadAux = user1.getBilhete().getCadeira();
+                        user1.alterar(user1, user1.getSessao(), response, user1.getNumeroTickets(), numCadAux, sala, aux);
                     }
 
                     if (response == 2) {
@@ -105,8 +105,6 @@ public class Main {
                         user1.getSessao().exibeCadeiras();
                         break;
                     }
-                    user1.dizBilhete();
-
                 } else if (aux == 2) {
 
                     System.out.println("\nDeseja alterar sua escolha?");
@@ -118,7 +116,8 @@ public class Main {
                     response = s.nextInt();
 
                     if (response < 3 && response >= 0) {
-                        user1.alterar(user1, user1.getSessao(), response, user1.getNumeroTickets(), user1.getNumeroCadeiraAux(), sala, aux);
+                        int[] numCadAux = user1.getBilhete().getCadeira();
+                        user1.alterar(user1, user1.getSessao(), response, user1.getNumeroTickets(), numCadAux, sala, aux);
                     }
 
                     if (response == 2) {
@@ -136,8 +135,6 @@ public class Main {
                         user1.getSessao().exibeCadeiras();
                         break;
                     }
-                    user1.dizBilhete();
-
                 } else if (aux == 3) {
 
                     System.out.println("\nDeseja alterar sua escolha?");
@@ -149,7 +146,8 @@ public class Main {
                     response = s.nextInt();
 
                     if (response < 3 && response >= 0) {
-                        user1.alterar(user1, user1.getSessao(), response, user1.getNumeroTickets(), user1.getNumeroCadeiraAux(), sala, aux);
+                        int[] numCadAux = user1.getBilhete().getCadeira();
+                        user1.alterar(user1, user1.getSessao(), response, user1.getNumeroTickets(), numCadAux, sala, aux);
                     }
 
                     if (response == 2) {
@@ -167,8 +165,6 @@ public class Main {
                         user1.getSessao().exibeCadeiras();
                         break;
                     }
-                    user1.dizBilhete();
-
                 } else if (aux == 4) {
 
                     System.out.println("\nDeseja alterar sua escolha?");
@@ -180,7 +176,8 @@ public class Main {
                     response = s.nextInt();
 
                     if (response < 3 && response >= 0) {
-                        user1.alterar(user1, user1.getSessao(), response, user1.getNumeroTickets(), user1.getNumeroCadeiraAux(), sala, aux);
+                        int[] numCadAux = user1.getBilhete().getCadeira();
+                        user1.alterar(user1, user1.getSessao(), response, user1.getNumeroTickets(), numCadAux, sala, aux);
                     }
 
                     if (response == 2) {
@@ -198,8 +195,6 @@ public class Main {
                         user1.getSessao().exibeCadeiras();
                         break;
                     }
-                    user1.dizBilhete();
-
                 } else if (aux == 5) {
 
                     System.out.println("\nDeseja alterar sua escolha?");
@@ -211,7 +206,8 @@ public class Main {
                     response = s.nextInt();
 
                     if (response < 3 && response >= 0) {
-                        user1.alterar(user1, user1.getSessao(), response, user1.getNumeroTickets(), user1.getNumeroCadeiraAux(), sala, aux);
+                        int[] numCadAux = user1.getBilhete().getCadeira();
+                        user1.alterar(user1, user1.getSessao(), response, user1.getNumeroTickets(), numCadAux, sala, aux);
                     }
 
                     if (response == 2) {
@@ -229,7 +225,6 @@ public class Main {
                         user1.getSessao().exibeCadeiras();
                         break;
                     }
-                    user1.dizBilhete();
                 } else if (aux == -2) {
                     P = 1;
                 } else {
@@ -242,5 +237,6 @@ public class Main {
             ex = new IndisponivelException(user1.getSessao().getCadeirasDisponiveis());
             System.out.println("Erro de seleção: " + ex.getMessage());
         }
+        System.out.println("\nCompra finalizada com sucesso!");
     }
 }

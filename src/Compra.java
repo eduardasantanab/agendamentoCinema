@@ -263,10 +263,21 @@ public class Compra {
 
                 aux = s.nextInt();
 
+                if (aux == 0) {
+                    usuario.comprar(sala);
+                    if(usuario.getBilhete() != null){
+                        usuario.getBilhete().setValor((total + (usuario.getNumeroTickets() * 25.00)));
+                        usuario.dizBilhete();
+                    }
+                    break;
+                } else {
+                    if(usuario.getBilhete() != null){
+                        usuario.dizBilhete();
+                    }
+                    System.out.println("\nTotal da compra: R$" + (total + usuario.getNumeroTickets() * 25));
+                    break;
+                }
             } while (aux != 1);
-
-            System.out.println("\nTotal da compra: R$" + (total + (numBilhetes * 25.00)));
-            bilhete.setValor((total + (numBilhetes * 25.00)));
         } else {
             comprarItens(sala, usuario, numBilhetes);
         }
@@ -304,10 +315,15 @@ public class Compra {
 
             if (aux == 0) {
                 usuario.comprar(sala);
-                usuario.getBilhete().setValor((total + (usuario.getNumeroTickets() * 25.00)));
-                usuario.dizBilhete();
+                if(usuario.getBilhete() != null){
+                    usuario.getBilhete().setValor((total + (usuario.getNumeroTickets() * 25.00)));
+                    usuario.dizBilhete();
+                }
                 break;
             } else {
+                if(usuario.getBilhete() != null){
+                    usuario.dizBilhete();
+                }
                 System.out.println("\nTotal da compra: R$" + (total + usuario.getNumeroTickets() * 25));
                 break;
             }
