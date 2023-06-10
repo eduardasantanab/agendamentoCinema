@@ -1,5 +1,5 @@
 import java.util.Scanner;
-class Estudante extends Usuario {
+class Estudante extends Usuario implements compraInterface {
     private Compra compra;
     private int numeroTickets = 0;
     Scanner s;

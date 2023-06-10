@@ -29,8 +29,8 @@ public abstract class Base {
         this.idade = idade;
     }
 
-    public abstract Critico adicionarCritico(String nome,String cpf, String senha, int idade, String sexo, String email, String nomeCartao, String numeroCartao, String codigoVerificadorCartao, String origem);
-    public abstract Usuario adicionarUsuario(String nome,String cpf, String senha, int idade, String sexo, String email, String nomeCartao, String numeroCartao, String codigoVerificadorCartao);
-    public abstract Estudante adicionarEstudante(String nome,String cpf, String senha, int idade, String sexo, String email, String nomeCartao, String numeroCartao, String codigoVerificadorCartao);
+    public abstract Critico adicionarCritico(String nome, String cpf, String senha, int idade, String sexo, String email, String nomeCartao, String numeroCartao, String codigoVerificadorCartao, String origem);
+    public abstract Usuario adicionarUsuario(String nome, String cpf, String senha, int idade, String sexo, String email, String nomeCartao, String numeroCartao, String codigoVerificadorCartao);
+    public abstract Estudante adicionarEstudante(String nome, String cpf, String senha, int idade, String sexo, String email, String nomeCartao, String numeroCartao, String codigoVerificadorCartao);
     public abstract void alterarUsuario(String ID);
 }

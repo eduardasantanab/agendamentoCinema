@@ -95,7 +95,7 @@ public class Administrador extends Base implements gerenciaDeFilmes {
 
         if (this.getUsers().isEmpty()) {
             this.getUsers().add(estudante);
-            System.out.println("Estudante adicionado com sucesso!");
+            System.out.println("base.Estudante adicionado com sucesso!");
             return estudante;
         }
 
@@ -106,7 +106,7 @@ public class Administrador extends Base implements gerenciaDeFilmes {
             }
         }
         this.getUsers().add(estudante);
-        System.out.println("Estudante cadastrado com sucesso!");
+        System.out.println("base.Estudante cadastrado com sucesso!");
         return estudante;
     }
 

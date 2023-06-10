@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Usuario {
+public class Usuario implements compraInterface {
 
     private String nome;
     private String cpf;

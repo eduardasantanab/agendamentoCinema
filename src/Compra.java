@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Compra {
+public class Compra implements exceptionInterface{
     private String[] itens;
     private Sala sala;
     private Filme filme;

@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Critico extends Usuario {
+public class Critico extends Usuario implements criticoInterface{
     private String origem;
     private Compra compra;
 
