@@ -233,11 +233,11 @@ public class Main {
                 System.out.println("\nDeseja finalizar a compra?\n0: SIM\n1: NÃO");
                 P = s.nextInt();
             } while (P == 1);
+            System.out.println("\nCompra finalizada com sucesso!");
         } catch (IndisponivelException ex) {
-            ex = new IndisponivelException(user1.getSessao().getCadeirasDisponiveis());
             System.out.println("Erro de seleção: " + ex.getMessage());
+            System.out.println("Compra finalizada com Erro!");
         }
-        System.out.println("\nCompra finalizada com sucesso!");
-    }
 
+    }
 }

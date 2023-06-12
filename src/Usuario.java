@@ -17,6 +17,8 @@ public class Usuario implements compraInterface {
     private int[] numeroCadeiraaux;
     private int[] numeroUnicoCadeira;
     private Sessao sessao;
+    private double cupom;
+
 
 
     public Usuario(String nome,String cpf, String senha, int idade, String sexo, String email, String nomeCartao, String numeroCartao, String codigoVerificadorCartao) {
@@ -31,6 +33,14 @@ public class Usuario implements compraInterface {
         this.codigoVerificadorCartao = codigoVerificadorCartao;
         this.s = new Scanner(System.in);
 
+    }
+
+    public double getCupom() {
+        return cupom;
+    }
+
+    public void setCupom(double cupom) {
+        this.cupom = cupom;
     }
 
     public Compra getCompra() {
@@ -273,7 +283,7 @@ public class Usuario implements compraInterface {
                 contador++;
             }
 
-            bilhete = new Bilhete(usuario, numSala, sessao, sala.getOneFilme(numSala), (25.0 * (numTickets+adicional)), ticketsFinal);
+            bilhete = new Bilhete(usuario, numSala, sessao, sala.getOneFilme(numSala), (25.0 * adicional * usuario.getCupom()) + usuario.getBilhete().getValor(), ticketsFinal);
             usuario.setNumeroTickets(numTickets + adicional);
             sessao.exibeCadeiras();
             usuario.setBilhete(bilhete);

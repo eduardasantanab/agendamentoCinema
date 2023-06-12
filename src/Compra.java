@@ -196,6 +196,7 @@ public class Compra implements exceptionInterface{
 
             sessao.selecionaCadeira(numeroCadeira, numerosTickets);
             sessao.exibeCadeiras();
+            user.setCupom(cupom.getValor());
 
             if (this.cupom.toLowerCase().compareTo(cupomPromocional[0].getCupom().toLowerCase()) == 0) {
                 System.out.println(
@@ -422,14 +423,17 @@ public class Compra implements exceptionInterface{
                             System.out.println("O Cupom: " + cupomPromocional[0].getCupom() + ", Foi adicionado com sucesso!");
                             valor = 25.0 * numerosTickets * multiply;
                             valor = valor * cupomPromocional[0].getValor();
+                            user.setCupom(cupomPromocional[0].getValor());
                         } else if (cupom.toLowerCase().compareTo(cupomPromocional[1].getCupom().toLowerCase()) == 0) {
                             System.out.println("O Cupom: " + cupomPromocional[1].getCupom() + ", Foi adicionado com sucesso!");
                             valor = 25.0 * numerosTickets * multiply;
                             valor = valor * cupomPromocional[1].getValor();
+                            user.setCupom(cupomPromocional[1].getValor());
                         } else if (cupom.toLowerCase().compareTo(cupomPromocional[2].getCupom().toLowerCase()) == 0) {
                             System.out.println("O Cupom: " + cupomPromocional[2].getCupom() + ", Foi adicionado com sucesso!");
                             valor = 25.0 * numerosTickets * multiply;
                             valor = valor * cupomPromocional[2].getValor();
+                            user.setCupom(cupomPromocional[2].getValor());
                         } else {
                             System.out.println("Cupom errado!");
                             valor = 25.0 * numerosTickets * multiply;

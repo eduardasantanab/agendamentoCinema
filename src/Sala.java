@@ -38,7 +38,6 @@ public class Sala {
         for (int i = 0; i < filmesAdicionados; i++) {
             System.out.println(i + ": " +getFilmes()[i].getNomeDoFilme() + " " + getFilmes()[i].getDuracaoFilme());
         }
-
     }
 
     public String horarioFilme(int indice) {
